@@ -16,7 +16,9 @@ Hypersolvers rely on [torchdyn](https://github.com/DiffEqML/torchdyn) and [torch
 <img src="media/hyperclass.gif" width="330" height="380">
 </p>
 
-If you find our work useful, consider citing us:
+This is a research project and not an official `DiffEqML` product. Expect bugs and sharp edges. Please help by trying it out, reporting bugs, and providing feedback!
+
+If you find our work useful, consider citing:
 
 ```
 @misc{poli2020hypersolvers,
