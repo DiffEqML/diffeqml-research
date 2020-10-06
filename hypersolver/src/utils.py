@@ -30,7 +30,7 @@ def plot(model, prior, target, step, save=True, show=False):
     ax[1].streamplot(xx.numpy(), xx.numpy(), U.T, V.T, color='w', density=2)
     ax[0].set_xlim([-2, 2]) ; ax[0].set_ylim([-2, 2]) ; ax[1].set_xlim([-2, 2]) ; ax[1].set_ylim([-2, 2])
     ax[0].set_title('trajectories / reconstructed density') ; ax[1].set_title('learned vector field')
-    if save: plt.savefig('tmp/step_%.3d' % step, dpi=100)
+    if save: plt.savefig('train_plots/ffjord_train_%.3d' % step, dpi=100)
     if not show: plt.close(fig)
         
 def density_scatter(x, y, ax=None, bins=20, **kwargs):
@@ -60,5 +60,5 @@ def plot_ffjord(model, hsolver, prior, step, save=True, show=False):
     density_scatter(heun_traj[-1,:,1], heun_traj[-1,:,2], ax[2])
     ax[0].set_xlim([-2, 2]) ; ax[0].set_ylim([-2, 2]) ; ax[1].set_xlim([-2, 2]) ; ax[1].set_ylim([-2, 2]) ; ax[2].set_xlim([-2, 2]) ; ax[2].set_ylim([-2, 2])
     ax[0].set_title('dopri5') ; ax[1].set_title('HyperHeun') ; ax[2].set_title('Heun')
-    if save: plt.savefig('tmp/hsolver_ffjord_%.3d' % step, dpi=100)
+    if save: plt.savefig('train_plots/hsolver_ffjord_%.3d' % step, dpi=100)
     if not show: plt.close(fig)

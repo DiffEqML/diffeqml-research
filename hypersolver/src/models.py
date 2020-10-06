@@ -29,7 +29,7 @@ class CNF(nn.Module):
 # special hypersolver version for `HyperHeun`. Can be adapted to the template with 
 # the appropriate tableau
 
-class DeepHeun(nn.Module):
+class HyperHeun(nn.Module):
     def __init__(self, f, solvnet):
         super().__init__()  
         self.m = solvnet
