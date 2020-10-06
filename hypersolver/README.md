@@ -13,7 +13,7 @@ This repository contains supplementary code for the experiments described in the
 Hypersolvers rely on [torchdyn](https://github.com/DiffEqML/torchdyn) and [torchdiffeq](https://github.com/rtqichen/torchdiffeq).
 
 <p align="center"> 
-<img src="media/hyperclass.gif" width="330" height="400">
+<img src="media/hyperclass.gif" width="330" height="380">
 </p>
 
 If you find our work useful, consider citing us:
