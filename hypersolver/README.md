@@ -6,7 +6,7 @@ paper: [arXiv link](https://arxiv.org/abs/2007.09601)
 
 <p align="center"> 
 <img src="media/hypersolvers.png" width="450" height="250">
-<img src="media/hyperclass.gif" width="200" height="400">
+<img src="media/hyperclass.gif" width="300" height="400">
 </p>
 
 This repository contains supplementary code for the experiments described in the main text, namely regarding applications of Hypersolvers to tasks: `image_classification` and `density_estimation.`. These notebooks are designed to be self-contained.
