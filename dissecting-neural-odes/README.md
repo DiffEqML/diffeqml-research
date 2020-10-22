@@ -12,7 +12,7 @@ This repository contains supplementary code for the experiments described in the
 The implementation is built on [PyTorch](https://pytorch.org/) and [PyTorch-Lightning](https://www.pytorchlightning.ai/) and relies on [torchdyn](https://github.com/DiffEqML/torchdyn) and [torchdiffeq](https://github.com/rtqichen/torchdiffeq).
 
 <p align="center"> 
-<img src="media/GalNODE.gif" width="200" height="200">
+<img src="media/GalNODE.gif" width="250" height="250">
 </p>
 
 This is a research project and not an official `DiffEqML` product. Expect bugs and sharp edges. Please help by trying it out, reporting bugs, and providing feedback!
