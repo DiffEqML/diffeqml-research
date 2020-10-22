@@ -1,3 +1,11 @@
 lightning_*
 data
-.ipynb*
+.ipynb_checkpoints
+train_plots
+wandb
+*.tex
+*.cpython-37.pyc
+*.json
+*.jsonl
+*.yaml
+*.ckpt

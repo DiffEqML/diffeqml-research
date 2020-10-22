@@ -5,15 +5,20 @@ This code for the paper "Hypersolvers: Toward Fast Continuous-Depth Models" to a
 paper: [arXiv link](https://arxiv.org/abs/2007.09601)
 
 <p align="center"> 
-<img src="media/hypersolvers.jpg" width="450" height="300">
-<img src="media/hyperclass.gif" width="200" height="200">
+<img src="media/hypersolvers.png" width="550" height="320">
 </p>
 
 This repository contains supplementary code for the experiments described in the main text, namely regarding applications of Hypersolvers to tasks: `image_classification` and `density_estimation.`. These notebooks are designed to be self-contained.
 
 Hypersolvers rely on [torchdyn](https://github.com/DiffEqML/torchdyn) and [torchdiffeq](https://github.com/rtqichen/torchdiffeq).
 
-If you find our work useful, consider citing us:
+<p align="center"> 
+<img src="media/hyperclass.gif" width="345" height="380">
+</p>
+
+This is a research project and not an official `DiffEqML` product. Expect bugs and sharp edges. Please help by trying it out, reporting bugs, and providing feedback!
+
+If you find our work useful, consider citing:
 
 ```
 @misc{poli2020hypersolvers,

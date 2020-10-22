@@ -1,3 +1,15 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import torch
 import torchdyn; from torchdyn.models import *;
 
@@ -30,7 +42,7 @@ def plot(model, prior, target, step, save=True, show=False):
     ax[1].streamplot(xx.numpy(), xx.numpy(), U.T, V.T, color='w', density=2)
     ax[0].set_xlim([-2, 2]) ; ax[0].set_ylim([-2, 2]) ; ax[1].set_xlim([-2, 2]) ; ax[1].set_ylim([-2, 2])
     ax[0].set_title('trajectories / reconstructed density') ; ax[1].set_title('learned vector field')
-    if save: plt.savefig('tmp/step_%.3d' % step, dpi=100)
+    if save: plt.savefig('train_plots/ffjord_train_%.3d' % step, dpi=100)
     if not show: plt.close(fig)
         
 def density_scatter(x, y, ax=None, bins=20, **kwargs):
@@ -60,5 +72,5 @@ def plot_ffjord(model, hsolver, prior, step, save=True, show=False):
     density_scatter(heun_traj[-1,:,1], heun_traj[-1,:,2], ax[2])
     ax[0].set_xlim([-2, 2]) ; ax[0].set_ylim([-2, 2]) ; ax[1].set_xlim([-2, 2]) ; ax[1].set_ylim([-2, 2]) ; ax[2].set_xlim([-2, 2]) ; ax[2].set_ylim([-2, 2])
     ax[0].set_title('dopri5') ; ax[1].set_title('HyperHeun') ; ax[2].set_title('Heun')
-    if save: plt.savefig('tmp/hsolver_ffjord_%.3d' % step, dpi=100)
+    if save: plt.savefig('train_plots/hsolver_ffjord_%.3d' % step, dpi=100)
     if not show: plt.close(fig)
