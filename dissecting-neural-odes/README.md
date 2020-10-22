@@ -5,7 +5,7 @@ This code for the paper "Dissecting Neural ODEs" to appear as an oral presentati
 paper: [arXiv link](https://arxiv.org/abs/2002.08071)
 
 <p align="center"> 
-<img src="media/formulation.png" width="350" height="250">
+<img src="media/formulation.png" width="450" height="250">
 </p>
 
 This repository contains supplementary code for the experiments described in the main text. These notebooks are designed to be self-contained.
