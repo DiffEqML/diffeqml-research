@@ -1,5 +1,5 @@
 <p align="center"> 
-<img src="media/formulation.png" width="460" height="190">
+<img src="media/formulation.png" width="460" height="180">
 </p>
 
 <div align="center">
