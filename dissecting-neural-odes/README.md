@@ -4,10 +4,10 @@
 
 <div align="center">
 
-[![NeurIPS](https://img.shields.io/badge/NeurIPS-2020-red.svg?)](https://papers.nips.cc/paper/2020/hash/f1686b4badcf28d33ed632036c7ab0b8-Abstract.html)
-[![License](https://img.shields.io/badge/License-Apache-black.svg?)](https://papers.nips.cc/paper/2020/hash/f1686b4badcf28d33ed632036c7ab0b8-Abstract.html)
-[![arXiv](https://img.shields.io/badge/arXiv-2007.09601-purple.svg?)](https://arxiv.org/abs/2007.09601)
-[![oral](https://img.shields.io/badge/NeurIPS-oral-blue.svg?)](https://papers.nips.cc/paper/2020/hash/f1686b4badcf28d33ed632036c7ab0b8-Abstract.html)
+[![NeurIPS](https://img.shields.io/badge/NeurIPS-2020-red.svg?)](https://papers.nips.cc/paper/2020/hash/293835c2cc75b585649498ee74b395f5-Abstract.html)
+[![License](https://img.shields.io/badge/License-Apache-black.svg?)](https://papers.nips.cc/paper/2020/hash/293835c2cc75b585649498ee74b395f5-Abstract.html)
+[![arXiv](https://img.shields.io/badge/arXiv-2002.08071-purple.svg?)](https://arxiv.org/abs/2002.08071)
+[![oral](https://img.shields.io/badge/NeurIPS-oral-blue.svg?)](https://papers.nips.cc/paper/2020/hash/293835c2cc75b585649498ee74b395f5-Abstract.html)
 
 </div>
 
