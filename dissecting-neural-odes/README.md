@@ -3,8 +3,10 @@
 </p>
 
 <div align="center">
-[![NeurIPS](https://img.shields.io/badge/NeurIPS-2020-red.svg?)](https://papers.nips.cc/paper/2020/hash/293835c2cc75b585649498ee74b395f5-Abstract.html)
+
 </div>
+
+[![NeurIPS](https://img.shields.io/badge/NeurIPS-2020-red.svg?)](https://papers.nips.cc/paper/2020/hash/293835c2cc75b585649498ee74b395f5-Abstract.html)
 
 This code for the paper "Dissecting Neural ODEs" to appear as an oral presentation in the Thirty-fourth Conference on Neural Information Processing Systems (NeurIPS 2020).
 
