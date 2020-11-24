@@ -3,7 +3,7 @@
 </p>
 
 <div align="center">
-[![NeurIPS](https://img.shields.io/badge/NeurIPS-2020-red)](https://img.shields.io/badge/NeurIPS-2020-red)
+[![NeurIPS](https://img.shields.io/badge/NeurIPS-2020-red)](https://papers.nips.cc/paper/2020/hash/293835c2cc75b585649498ee74b395f5-Abstract.html)
 </div>
 
 
