@@ -1,3 +1,17 @@
+<p align="center"> 
+<img src="media/hypersolvers.png" width="550" height="320">
+</p>
+
+<div align="center">
+      
+[![NeurIPS](https://img.shields.io/badge/NeurIPS-2020-red.svg?)](https://papers.nips.cc/paper/2020/hash/f1686b4badcf28d33ed632036c7ab0b8-Abstract.html)
+[![License](https://img.shields.io/badge/License-Apache-black.svg?)](https://papers.nips.cc/paper/2020/hash/f1686b4badcf28d33ed632036c7ab0b8-Abstract.html)
+[![arXiv](https://img.shields.io/badge/arXiv-2002.08071-purple.svg?)](https://arxiv.org/abs/2002.08071)
+[![oral](https://img.shields.io/badge/NeurIPS-oral-blue.svg?)](https://papers.nips.cc/paper/2020/hash/f1686b4badcf28d33ed632036c7ab0b8-Abstract.html)
+
+</div>
+
+
 This code for the paper "Hypersolvers: Toward Fast Continuous-Depth Models" to appear in the Thirty-fourth Conference on Neural Information Processing Systems (NeurIPS 2020).
 
 ```The infinite--depth paradigm pioneered by Neural ODEs has launched a renaissance in the search for novel dynamical system-inspired deep learning primitives; however, their utilization in problems of non-trivial size has often proved impossible due to poor computational scalability. This work paves the way for scalable Neural ODEs with time-to-prediction comparable to traditional discrete networks. We introduce hypersolvers, neural networks designed to solve ODEs with low overhead and theoretical guarantees on accuracy. The synergistic combination of hypersolvers and Neural ODEs allows for cheap inference and unlocks a new frontier for practical application of continuous--depth models. Experimental evaluations on standard benchmarks, such as sampling for continuous normalizing flows, reveal consistent pareto efficiency over classical numerical methods.```
