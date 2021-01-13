@@ -32,7 +32,9 @@ If you find our work useful, consider citing us:
 @article{massaroli2020dissecting,
   title={Dissecting neural odes},
   author={Massaroli, Stefano and Poli, Michael and Park, Jinkyoo and Yamashita, Atsushi and Asama, Hajime},
-  journal={arXiv preprint arXiv:2002.08071},
+  eprint={2002.08071},
+  archivePrefix={arXiv},
+  primaryClass={cs.LG}
   year={2020}
 }
 ```
