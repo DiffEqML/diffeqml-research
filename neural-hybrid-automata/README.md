@@ -1,6 +1,6 @@
 <div align="center">
-# Neural Hybrid Automata: 
-# Learning Dynamics with Multiple Modes and Stochastic Transitions
+Neural Hybrid Automata: 
+Learning Dynamics with Multiple Modes and Stochastic Transitions
       
 </div>
       
