@@ -1,12 +1,18 @@
+"Script to generate trajectories of the internal states of a Reno TCP"
 from absl import app, flags
 from tqdm import tqdm
 from pathlib import Path
 
+import torch
+import torch.nn as nn
+
 import numpy as np
 import sys; sys.path.append('../../')
-from src.solvers import *
-from src.odeint import *
-from src.utils import EventCallback, StochasticEventCallback
+
+from torchdyn.numerics import *
+from torchdyn.numerics.odeint import odeint_hybrid
+from torchdyn.numerics.utils import EventCallback, StochasticEventCallback
+from src.odeint import odeint_hybrid
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string("system", "TCP", "Hybrid system to simulate")
@@ -15,7 +21,6 @@ flags.DEFINE_integer("num_simulations", 40, "Number of simulations to run and sa
 
 
 ###### TCP event classes and simulator
-@attr.s
 class TCPEvent1(StochasticEventCallback):
     def check_event(self, t, x):
         w, s, q, λ = x[..., :1], x[..., 1:2], x[..., 2:3], x[..., 3:4]
@@ -31,7 +36,6 @@ class TCPEvent1(StochasticEventCallback):
         return torch.cat([wj, sj, qj, λj], 1)
 
 
-@attr.s
 class TCPEvent2(StochasticEventCallback):
     def check_event(self, t, x):
         w, s, q, λ = x[..., :1], x[..., 1:2], x[..., 2:3], x[..., 4:5]
@@ -47,7 +51,6 @@ class TCPEvent2(StochasticEventCallback):
         return torch.cat([wj, sj, qj, λj], 1)
 
 
-@attr.s
 class TCPEvent3(StochasticEventCallback):
     def check_event(self, t, x):
         w, s, q, λ = x[..., :1], x[..., 1:2], x[..., 2:3], x[..., 4:5]
@@ -63,7 +66,6 @@ class TCPEvent3(StochasticEventCallback):
         return torch.cat([wj, sj, qj, λj], 1)
 
 
-@attr.s
 class TCPEvent4(StochasticEventCallback):
     def check_event(self, t, x):
         w, s, q, λ = x[..., :1], x[..., 1:2], x[..., 2:3], x[..., 4:5]
@@ -80,7 +82,6 @@ class TCPEvent4(StochasticEventCallback):
         return torch.cat([wj, sj, qj, λj], 1)
 
 
-@attr.s
 class TCPEvent5(StochasticEventCallback):
     def check_event(self, t, x):
         w, s, q, λ = x[..., :1], x[..., 1:2], x[..., 2:3], x[..., 4:5]
@@ -101,11 +102,11 @@ class TCPSimulator(nn.Module):
         super().__init__()
         self.w0e1 = 0.693
         self.τoff = 3
-        self.RTT = 1#2
+        self.RTT = 1
         self.nack = 2
         self.pdrop = 0.05
         self.l2 = 0.693
-        self.k = 20#4
+        self.k = 20
 
     def forward(self, t, x):
         w, s, q = x[..., :1], x[..., 1:2], x[..., 2]
@@ -163,10 +164,11 @@ def generate_trajectories(argv):
         callbacks = [TCPEvent1(), TCPEvent2(), TCPEvent3(), TCPEvent4(), TCPEvent5()]
         x0 = torch.cat([x0_, torch.zeros(x0_.shape[0], len(callbacks))], 1)
         for cb in callbacks: cb.initialize(x0)
-        t_eval, sol = odeint_hybrid(f, x0, t_span=torch.tensor([0., 100.]), j_span=10, callbacks=callbacks,
-                                    t_eval=torch.linspace(0, 100, 2000)[1:-1], event_tol=1e-4, solver=solver, atol=1e-6,
-                                    rtol=1e-6)
-
+        # t_eval, sol = odeint_hybrid(f, x0, t_span=torch.tensor([0., 100.]), j_span=10, callbacks=callbacks,
+        #                             t_eval=torch.linspace(0, 100, 2000)[1:-1], event_tol=1e-4, solver=solver, atol=1e-6,
+        #                             rtol=1e-6)
+        t_eval, sol = odeint_hybrid(f, x0, t_span=torch.linspace(0, 100, 2000), j_span=10, callbacks=callbacks, 
+                                    event_tol=1e-4, solver=solver, atol=1e-6, rtol=1e-6)
         print("Generating data...")
         for i in tqdm(range(FLAGS.num_simulations)):
             x0_ = torch.tensor([[0., 0., 0]])
@@ -174,11 +176,10 @@ def generate_trajectories(argv):
             callbacks = [TCPEvent1(), TCPEvent2(), TCPEvent3(), TCPEvent4(), TCPEvent5()]
             x0 = torch.cat([x0_, torch.zeros(x0_.shape[0], len(callbacks))], 1)
             for cb in callbacks: cb.initialize(x0)
-            t_eval, sol = odeint_hybrid(f, x0, t_span=torch.tensor([0., 100.]), j_span=10, callbacks=callbacks,
-                                        t_eval=torch.linspace(0, 100, 2000)[1:-1], event_tol=1e-4, solver=solver, atol=1e-6,
-                                        rtol=1e-6)
+            t_eval, sol = odeint_hybrid(f, x0, t_span=torch.linspace(0, 100, 2000), j_span=10, callbacks=callbacks, 
+                                        event_tol=1e-4, solver=solver, atol=1e-6, rtol=1e-6)
 
-            torch.save(t_eval, f'../../data/tcp/raw_t_eval_{i}');
+            torch.save(t_eval, f'../../data/tcp/raw_t_eval_{i}')
             torch.save(sol, f'../../data/tcp/raw_sol_{i}')
 
 

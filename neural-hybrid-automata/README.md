@@ -1,3 +1,7 @@
+<p align="center">
+<img src="https://github.com/DiffEqML/diffeqml-media/blob/main/images/nha_fig1.jpeg" width="250" height="200">
+</p>
+
 <div align="center">
       
 [![NeurIPS](https://img.shields.io/badge/NeurIPS-2021-red.svg?)](https://papers.nips.cc/paper/2021/hash/f1686b4badcf28d33ed632036c7ab0b8-Abstract.html)
