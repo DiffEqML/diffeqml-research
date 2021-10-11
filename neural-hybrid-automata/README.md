@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/DiffEqML/diffeqml-media/blob/main/images/nha/nha_fig1.jpeg" width="250" height="200">
+<img src="https://github.com/DiffEqML/diffeqml-media/blob/main/images/nha/nha_fig1.jpg" width="250" height="200">
 </p>
 
 <div align="center">
@@ -28,7 +28,7 @@ We provide a multi-stage recipe to learn without knowing how many modes the unde
 
 
 <p align="center">
-<img src="https://github.com/DiffEqML/diffeqml-media/blob/main/images/nha/nha_fig2.jpeg" width="250" height="200">
+<img src="https://github.com/DiffEqML/diffeqml-media/blob/main/images/nha/nha_fig2.jpg" width="250" height="200">
 </p>
 
 Note that we do assume the existence of a segmentation algorithm to separate subtrajectories due to the phenomenon discussed at the end of Section 4 and in Appendix A.
