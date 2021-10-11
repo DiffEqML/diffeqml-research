@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/DiffEqML/diffeqml-media/blob/main/images/nha_fig1.jpeg" width="250" height="200">
+<img src="https://github.com/DiffEqML/diffeqml-media/blob/main/images/nha/nha_fig1.jpeg" width="250" height="200">
 </p>
 
 <div align="center">
