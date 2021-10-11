@@ -1,3 +1,5 @@
+# Neural Hybrid Automata: Learning Dynamics with Multiple Modes and Stochastic Transitions
+
 <p align="center">
 <img src="https://github.com/DiffEqML/diffeqml-media/blob/main/images/nha/nha_fig1.jpg">
 </p>
