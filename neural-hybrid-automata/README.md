@@ -63,6 +63,17 @@ determines mode switching for a lower–level optimal controller.
 
 `python generate_data.py` to generate TCP trajectories seen in the paper. `python train_mode_recovery.py` to perform self-supervised mode recovery and trajectory reconstruction.
 
+In particular, the commands to perform trajectory reconstruction with various models are:
+
+```
+nohup python train_mode_recovery.py --n_modes 3 --model NHA &
+nohup python train_mode_recovery.py --n_modes 5 --model NHA &
+nohup python train_mode_recovery.py --n_modes 10 --model NHA &
+nohup python train_mode_recovery.py --model NODE &
+nohup python train_mode_recovery.py --model DCNODE &
+nohup python train_mode_recovery.py --model LatentNODE &
+```
+
 ### Mode Mixing in Switching Systems
 
 Seeded notebooks for `softmax` and `categorical` encoders are under `experiments/lss`. TL;DR: `categorical` encoders are better for mode recovery as no mode mixing can occur + it is possible to prune redundant modes since they are guaranteed to be "similar" across the state space (see Appendix B.3).

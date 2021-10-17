@@ -5,11 +5,11 @@ def get_train_flows_config():
   config = ml_collections.ConfigDict()
 
   # training
-  config.enc_optim = torch.optim.Adam
-  config.enc_lr = 5e-4
-  config.dec_optim = torch.optim.Adam
+  config.enc_optim = torch.optim.AdamW
+  config.enc_lr = 3e-4
+  config.dec_optim = torch.optim.AdamW
   config.dec_lr = 1e-2
-  config.epochs = 4000
+  config.epochs = 8000
   config.norm_trajectories = False
 
   # model setup
@@ -18,7 +18,8 @@ def get_train_flows_config():
   config.dropout = True
 
 
-  config.device = torch.device("cuda:0")
+  config.device = torch.device("cuda:1")
+  config.seed = 1234
 
   return config
 
@@ -27,11 +28,11 @@ def get_train_flows_noise_config():
   config = ml_collections.ConfigDict()
 
   # training
-  config.enc_optim = torch.optim.Adam
-  config.enc_lr = 5e-4
-  config.dec_optim = torch.optim.Adam
+  config.enc_optim = torch.optim.AdamW
+  config.enc_lr = 3e-4
+  config.dec_optim = torch.optim.AdamW
   config.dec_lr = 1e-2
-  config.epochs = 4000
+  config.epochs = 8000
   config.norm_trajectories = False
   config.corruption_probability = 0.1
   config.corruption_intensity = 10
@@ -41,7 +42,8 @@ def get_train_flows_noise_config():
   config.nonlinear = False # linear or nonlinear decoder
   config.dropout = True
 
-  config.device = torch.device("cuda:1")
+  config.device = torch.device("cuda:2")
+  config.seed = 1234
 
   return config
 
