@@ -19,7 +19,6 @@ def get_train_flows_config():
 
 
   config.device = torch.device("cuda:1")
-  config.seed = 1234
 
   return config
 

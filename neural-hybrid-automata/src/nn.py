@@ -99,14 +99,15 @@ class CDEFunc(nn.Module):
 
 
 class LatentEncoder(nn.Module):
-    def __init__(self, net):
+    def __init__(self, net, n_modes=3):
         super().__init__()
         self.net = net
         self.sp = nn.Softplus()
+        self.n_modes = n_modes
 
     def forward(self, x):
         x = self.net(x)
-        mu, sigma = x[...,:3], self.sp(x[...,3:])
+        mu, sigma = x[...,:self.n_modes], self.sp(x[...,self.n_modes:])
         dist = Independent(Normal(mu, sigma), reinterpreted_batch_ndims=0)
         return dist.rsample((1,))[0]
 
