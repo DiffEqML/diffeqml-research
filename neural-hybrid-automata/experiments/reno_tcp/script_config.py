@@ -18,8 +18,7 @@ def get_train_flows_config():
   config.dropout = True
 
 
-  config.device = torch.device("cuda:1")
-  config.seed = 1234
+  config.device = torch.device("cuda:0")
 
   return config
 
@@ -34,7 +33,7 @@ def get_train_flows_noise_config():
   config.dec_lr = 1e-2
   config.epochs = 8000
   config.norm_trajectories = False
-  config.corruption_probability = 0.1
+  config.corruption_probability = 0.3
   config.corruption_intensity = 10
 
   # model setup
@@ -42,8 +41,7 @@ def get_train_flows_noise_config():
   config.nonlinear = False # linear or nonlinear decoder
   config.dropout = True
 
-  config.device = torch.device("cuda:2")
-  config.seed = 1234
+  config.device = torch.device("cuda:0")
 
   return config
 

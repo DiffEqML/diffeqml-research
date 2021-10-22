@@ -9,7 +9,7 @@ from ml_collections.config_flags import config_flags
 from src.nn import ConditionedNHADecoder, NHADiscreteModeEncoder, NHA, \
                 AugmentedNeuralODE, RegularDecoder, AugmentedDecoder, LatentEncoder, \
                 DCNeuralODE, LatentODE
-
+import numpy as np
 import torch
 import torch.nn as nn
 from torchdyn.numerics import *
@@ -35,6 +35,9 @@ flags.DEFINE_integer("n_test_trajs", 15, "Number of test trajectories")
 flags.DEFINE_integer("n_modes", 3, "Number of NHA latent modes")
 flags.DEFINE_integer("add_emb_dims", 0, "Additional augmented dims for all models (non-mode related)")
 flags.DEFINE_bool("test_result", True, "Whether to test final model. Turned on only after tuning on cross-val.")
+flags.DEFINE_float("corruption_probability", 0.1, "Probability for noise to be injected at any mode switch during segmentation.")
+
+
 
 
 def build_model(solver, n_modes, device):
@@ -53,38 +56,6 @@ def build_model(solver, n_modes, device):
                                            device=FLAGS.config.device), dec, solver, n_pts_enc=n_modes).to(device)
 
 
-    elif FLAGS.model == 'NODE':
-        f = nn.Sequential(nn.Linear(2+n_modes, 32), nn.SELU(), nn.Linear(32, 32), nn.SELU(), nn.Linear(32, 32),
-                          nn.Linear(32, 32), nn.Tanh(), nn.Linear(32, 2+n_modes))
-        dec = RegularDecoder(f)
-        model = AugmentedNeuralODE(dec, solver).to(device)
-
-    elif FLAGS.model == 'DCNODE':
-        f = nn.Sequential(nn.Linear(2+n_modes, 2))
-        dec = AugmentedDecoder(f, aug_dims=n_modes)
-        if FLAGS.config.dropout:
-            enc = nn.Sequential(nn.Linear(10, 64), nn.Dropout(0.3), nn.ReLU(),
-                                     nn.Linear(64, 64), nn.Dropout(0.3), nn.ReLU(), nn.Linear(64, 64),
-                                     nn.Dropout(0.3), nn.Tanh(), nn.Linear(64, n_modes, bias=False))
-        else:
-            enc = nn.Sequential(nn.Linear(10, 32), nn.ReLU(),
-                                     nn.Linear(32, 32), nn.ReLU(), nn.Linear(32, 32),
-                                     nn.Tanh(), nn.Linear(32, n_modes, bias=False))
-        model = DCNeuralODE(enc, dec, solver, n_pts_enc=3).to(device)
-
-    elif FLAGS.model == 'LatentNODE':
-        f = nn.Sequential(nn.Linear(2 + n_modes, 2))
-        dec = AugmentedDecoder(f, aug_dims=n_modes)
-        if FLAGS.config.dropout:
-            enc = nn.Sequential(nn.Linear(10, 64), nn.Dropout(0.3), nn.ReLU(),
-                                     nn.Linear(64, 64), nn.Dropout(0.3), nn.ReLU(), nn.Linear(64, 64),
-                                     nn.Dropout(0.3), nn.Tanh(), nn.Linear(64, n_modes, bias=False))
-        else:
-            enc = nn.Sequential(nn.Linear(10, 32), nn.ReLU(),
-                                     nn.Linear(32, 32), nn.ReLU(), nn.Linear(32, 32),
-                                     nn.Tanh(), nn.Linear(32, n_modes, bias=False))
-        model = LatentODE(LatentEncoder(enc), dec, solver, n_pts_enc=3).to(device)
-
     p = f[-1].weight
     torch.nn.init.zeros_(p)
     p = f[-1].bias
@@ -94,8 +65,9 @@ def build_model(solver, n_modes, device):
 
 
 def main(argv):
-    torch.manual_seed(FLAGS.config.seed)
-    np.random.seed(FLAGS.config.seed)
+    torch.manual_seed(FLAGS.seed)
+    np.random.seed(FLAGS.seed)
+
 
     import os
     os.environ['WANDB_SILENT'] = "true"
@@ -111,11 +83,7 @@ def main(argv):
         preprocess_data(FLAGS.n_train_trajs, FLAGS.n_val_folds, FLAGS.n_test_trajs, False,
                         True, FLAGS.config.corruption_probability, FLAGS.config.corruption_intensity)
 
-    solver = DormandPrince45().to(device)
-    solver.c = solver.c.to(device)
-    solver.a = [a_.to(device) for a_ in solver.a]
-    solver.bsol = solver.bsol.to(device)
-    solver.berr = solver.berr.to(device)
+    solver = RungeKutta4().to(device)
 
     # train and evaluate on each fold
     for k in range(FLAGS.n_val_folds):
@@ -138,7 +106,7 @@ def main(argv):
 
 
         t_traj_segments = [t_.to(device) for t_ in data_t_segments[k]]
-
+        solver.sync_device_dtype(x_feats, t_traj_segments[0])
 
         # initialize logging
         wandb.init(project="NHA_noise_final", name=f"""{FLAGS.model}_
