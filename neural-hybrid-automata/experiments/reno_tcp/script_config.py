@@ -20,6 +20,7 @@ def get_train_flows_config():
 
   config.device = torch.device("cuda:0")
 
+
   return config
 
 

@@ -54,7 +54,7 @@ def build_model(solver, n_modes, device):
         f = nn.Sequential(nn.Linear(2+n_modes, 32), nn.SELU(), nn.Linear(32, 32), nn.SELU(), nn.Linear(32, 32),
                           nn.Linear(32, 32), nn.Tanh(), nn.Linear(32, 2+n_modes))
         dec = RegularDecoder(f)
-        model = AugmentedNeuralODE(dec, solver).to(device)
+        model = AugmentedNeuralODE(dec, solver, dims_to_augment=n_modes).to(device)
 
     elif FLAGS.model == 'DCNODE':
         f = nn.Sequential(nn.Linear(2+n_modes, 2))
@@ -80,7 +80,7 @@ def build_model(solver, n_modes, device):
             enc = nn.Sequential(nn.Linear(10, 32), nn.ReLU(),
                                      nn.Linear(32, 32), nn.ReLU(), nn.Linear(32, 32),
                                      nn.Tanh(), nn.Linear(32, 2*n_modes, bias=False))
-        model = LatentODE(LatentEncoder(enc), dec, solver, n_pts_enc=3).to(device)
+        model = LatentODE(LatentEncoder(enc, n_modes=n_modes), dec, solver, n_pts_enc=3).to(device)
 
     p = f[-1].weight
     torch.nn.init.zeros_(p)
@@ -91,8 +91,8 @@ def build_model(solver, n_modes, device):
 
 
 def main(argv):
-    torch.manual_seed(FLAGS.config.seed)
-    np.random.seed(FLAGS.config.seed)
+    torch.manual_seed(FLAGS.seed)
+    np.random.seed(FLAGS.seed)
 
     import os
     os.environ['WANDB_SILENT'] = "true"
@@ -125,12 +125,10 @@ def main(argv):
         solver.sync_device_dtype(x_feats, t_traj_segments[0])
 
         # initialize logging
-        wandb.init(project="NHA_final", name=f"""{FLAGS.model}_
-                modes:{FLAGS.n_modes}_
-                cat:{FLAGS.config.categorical_type}_
-                nonlin:{FLAGS.config.nonlinear}-
-                drop:{FLAGS.config.dropout}""", config=FLAGS.config
-            )
+        wandb.init(project="NHA_ready", name=f"""{FLAGS.model}_
+                    modes:{FLAGS.n_modes}""", 
+                    config=FLAGS.config
+                )
 
 
         opt_enc = FLAGS.config["enc_optim"](list(model.enc.parameters()), lr=FLAGS.config["enc_lr"])
