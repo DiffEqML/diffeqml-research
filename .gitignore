@@ -9,3 +9,8 @@ wandb
 *.jsonl
 *.yaml
 *.ckpt
+*__pycache__*
+*nohup*
+
+% nha
+neural-hybrid-automata/experiments/reno_tcp/tcp*
