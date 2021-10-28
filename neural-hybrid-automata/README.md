@@ -66,13 +66,16 @@ determines mode switching for a lower–level optimal controller.
 In particular, the commands to perform trajectory reconstruction with various models are:
 
 ```
-nohup python train_mode_recovery.py --n_modes 3 --model NHA &
-nohup python train_mode_recovery.py --n_modes 5 --model NHA &
-nohup python train_mode_recovery.py --n_modes 10 --model NHA &
-nohup python train_mode_recovery.py --model NODE &
-nohup python train_mode_recovery.py --model DCNODE &
-nohup python train_mode_recovery.py --model LatentNODE &
+python train_mode_recovery.py --n_modes 5 --model NHA 
+python train_mode_recovery.py --n_modes 10 --model NHA 
+python train_mode_recovery.py --n_modes 3 --model NHA 
+python train_mode_recovery.py --n_modes 10 --model NODE 
+python train_mode_recovery.py --n_modes 10 --model DCNODE 
+python train_mode_recovery.py --n_modes 10 --model LatentNODE 
 ```
+
+
+
 
 ### Mode Mixing in Switching Systems
 

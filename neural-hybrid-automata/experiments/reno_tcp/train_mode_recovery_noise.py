@@ -36,7 +36,7 @@ flags.DEFINE_integer("n_modes", 3, "Number of NHA latent modes")
 flags.DEFINE_integer("add_emb_dims", 0, "Additional augmented dims for all models (non-mode related)")
 flags.DEFINE_bool("test_result", True, "Whether to test final model. Turned on only after tuning on cross-val.")
 flags.DEFINE_float("corruption_probability", 0.1, "Probability for noise to be injected at any mode switch during segmentation.")
-
+flags.DEFINE_integer("corruption_intensity", 10, "Intensity of noise injected.")
 
 
 
@@ -81,7 +81,7 @@ def main(argv):
 
     data_sol_segments, data_t_segments, n_segments = \
         preprocess_data(FLAGS.n_train_trajs, FLAGS.n_val_folds, FLAGS.n_test_trajs, False,
-                        True, FLAGS.config.corruption_probability, FLAGS.config.corruption_intensity)
+                        True, FLAGS.corruption_probability, FLAGS.corruption_intensity)
 
     solver = RungeKutta4().to(device)
 
@@ -111,8 +111,8 @@ def main(argv):
         # initialize logging
         wandb.init(project="NHA_noise_final", name=f"""{FLAGS.model}_
                     modes:{FLAGS.n_modes}_
-                    p_noise:{FLAGS.config.corruption_probability}
-                    eps_noise:{FLAGS.config.corruption_intensity}""", 
+                    p_noise:{FLAGS.corruption_probability}
+                    eps_noise:{FLAGS.corruption_intensity}""", 
                     config=FLAGS.config
                 )
 
