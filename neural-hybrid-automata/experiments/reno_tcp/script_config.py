@@ -17,12 +17,8 @@ def get_train_flows_config():
   config.nonlinear = False # linear or nonlinear decoder
   config.dropout = True
 
-
   config.device = torch.device("cuda:0")
-
-
   return config
-
 
 def get_train_flows_noise_config():
   config = ml_collections.ConfigDict()
@@ -42,9 +38,7 @@ def get_train_flows_noise_config():
   config.dropout = True
 
   config.device = torch.device("cuda:2")
-
   return config
-
 
 train_flows_config = get_train_flows_config()
 train_flows_noise_config = get_train_flows_noise_config()
