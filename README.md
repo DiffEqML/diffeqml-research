@@ -5,7 +5,7 @@ All source files in this repository are released under the Apache 2.0 license, w
 
 Publications with code shared in `diffeqml-research`:
 
-> Federico Berto, Stefano Massaroli, Michael Poli, Jinkyoo Park
+> Federico Berto, Stefano Massaroli, Michael Poli, Jinkyoo Park;
 Neural Solvers for Fast and Accurate Numerical Optimal Control; 
 International Conference on Learning Representations (ICLR 2022)
 
