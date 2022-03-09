@@ -6,8 +6,8 @@
 
 <div align="center">
       
-[![NeurIPS](https://img.shields.io/badge/ICLR-2022-red.svg?)]
-[![License](https://img.shields.io/badge/License-Apache-black.svg?)]
+![NeurIPS](https://img.shields.io/badge/ICLR-2022-red.svg?)
+![License](https://img.shields.io/badge/License-Apache-black.svg?)
 <!-- [![arXiv](https://img.shields.io/badge/arXiv-2106.04165-purple.svg?)](https://arxiv.org/abs/2106.04165) -->
 <!-- TODO: add links! -->
  
