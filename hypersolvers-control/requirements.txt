@@ -1,0 +1,10 @@
+torchdyn>=1.0.1
+torchdiffeq
+numpy
+torch
+multiprocessing
+ipykernel
+matplotlib
+tqdm
+scipy
+ptflops
